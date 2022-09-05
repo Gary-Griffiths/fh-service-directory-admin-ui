@@ -1,0 +1,41 @@
+﻿@page
+@model FamilyHubs.ServiceDirectoryAdminUi.Ui.Pages.OrganisationAdmin.OfferAtFamiliesPlaceModel
+@{
+}
+
+<a asp-page="/OrganisationAdmin/InPersonWhere" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" class="govuk-back-link">Back</a>
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+     <fieldset class="govuk-fieldset">
+      <h2 class="govuk-fieldset__heading-l">
+          Can families choose where they use the service?
+      </h2>
+      <div id="heading-hint" class="govuk-hint">
+        For example, the family's home or a public place.
+      </div>
+      <form method="post">
+
+        <div class="govuk-form-group">
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="Familychoice" name="Familychoice" type="radio" value="Yes">
+              <label class="govuk-label govuk-radios__label" for="family-choice">
+                Yes, they can choose where
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="Familychoice2" name="Familychoice" type="radio" value="No">
+              <label class="govuk-label govuk-radios__label" for="Familychoice">
+                No, they cannot choose where
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+      <button class="govuk-button">
+        Continue
+      </button>
+    </form>
+    </fieldset>
+</main>

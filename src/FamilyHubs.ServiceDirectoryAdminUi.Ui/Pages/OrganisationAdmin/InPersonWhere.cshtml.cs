@@ -20,9 +20,6 @@ public class InPersonWhereModel : PageModel
     public string State_province { get; set; } = default!;
 
     [BindProperty]
-    public List<string> InPersonSelection { get; set; } = default!;
-
-    [BindProperty]
     public OrganisationViewModel OrganisationViewModel { get; set; } = new OrganisationViewModel();
 
     [BindProperty]
@@ -53,33 +50,19 @@ public class InPersonWhereModel : PageModel
                 Postal_code = OrganisationViewModel.Postal_code;
             if (!string.IsNullOrEmpty(OrganisationViewModel.State_province))
                 State_province = OrganisationViewModel.State_province;
-            if (OrganisationViewModel.InPersonSelection != null && OrganisationViewModel.InPersonSelection.Any())
-                InPersonSelection = OrganisationViewModel.InPersonSelection;
         }
     }
 
     public async Task<IActionResult> OnPost()
     {
-        if (InPersonSelection.Contains("Our own location"))
-        {
-            ModelState.Remove("Country");
-            Country = "England";
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-        }
-
-        if (!InPersonSelection.Any())
-        {
-            return Page();
-        }
+        //if (!ModelState.IsValid)
+        //{
+        //    return Page();
+        //}
         
-
         if (!string.IsNullOrEmpty(StrOrganisationViewModel))
         {
             OrganisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
-            OrganisationViewModel.InPersonSelection = new List<string>(InPersonSelection);
             OrganisationViewModel.Address_1 = Address_1;
             OrganisationViewModel.City = City;
             OrganisationViewModel.State_province = State_province;
@@ -99,11 +82,9 @@ public class InPersonWhereModel : PageModel
             StrOrganisationViewModel = JsonConvert.SerializeObject(OrganisationViewModel);
         }
 
-        return RedirectToPage("/OrganisationAdmin/WhoFor", new
+        return RedirectToPage("/OrganisationAdmin/OfferAtFamiliesPlace", new
         {
             strOrganisationViewModel = StrOrganisationViewModel
         });
-
-
     }
 }

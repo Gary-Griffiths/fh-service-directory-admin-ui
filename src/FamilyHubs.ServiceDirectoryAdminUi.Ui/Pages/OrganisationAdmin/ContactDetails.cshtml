@@ -66,6 +66,22 @@
                 </div>
 
               </div>
+
+               <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="ContactSelectionTextMessage" name="ContactSelectionTextMessage" type="checkbox" value="phone" data-aria-controls="conditional-contact-4">
+                <label class="govuk-label govuk-checkboxes__label" for="ContactSelectionTextMessage">
+                  Text message
+                </label>
+              </div>
+              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-4">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="contact-by-phone">
+                    Telephone number
+                  </label>
+                  <input class="govuk-input govuk-!-width-one-third" id="contact-by-text" name="Textphone" value="@Model.Textphone" type="tel" autocomplete="tel">
+                </div>
+              </div>
+
             </div>
         </div>
 

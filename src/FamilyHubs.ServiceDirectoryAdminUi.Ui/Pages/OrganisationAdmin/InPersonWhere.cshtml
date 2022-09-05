@@ -8,61 +8,55 @@
 <main class="govuk-main-wrapper " id="main-content" role="main">
 
      <fieldset class="govuk-fieldset">
-        <h1 class="govuk-fieldset__heading">
-            Where does the in person support take place?
+        <h1 class="govuk-fieldset__heading-l">
+            Address
         </h1>
+         <br />
+        <p class="govuk-body">Give an address where families use the service. This helps people find the service when they search by location. </p>
+        <p class="govuk-body">If families can go to different addresses, give the main one. You can add others later.</p>
+
       <form method="post">
 
         <input asp-for="@Model.StrOrganisationViewModel" type="hidden" >
 
+
+        <h2 class="govuk-heading-m">What is the address?</h2>
         <div class="govuk-form-group">
-          <div id="hint" class="govuk-hint">
-            Select all that apply.
-          </div>
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="InPersonSelection" name="InPersonSelection" type="checkbox" value="Our own location" data-aria-controls="conditional-address" @(Model.InPersonSelection != null && Model.InPersonSelection.Any(x=>x=="Our own location") ? "data-conditional-active" : "")>
-              <label class="govuk-label govuk-checkboxes__label" for="InPersonSelection">
-                Our own location
-              </label>
-            </div>
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-address">
               <div class="govuk-form-group">
-                <label class="govuk-label" for="Address_1">
+                <label class="govuk-label" for="address-line-1">
                   Address line 1
                 </label>
                 <input class="govuk-input" id="Address_1" name="Address_1" type="text" value="@Model.Address_1" autocomplete="Address_1">
               </div>
 
+              @*<div class="govuk-form-group">
+                <label class="govuk-label" for="address-line-2">
+                  Address line 2 (optional)
+                </label>
+                <input class="govuk-input" id="address-line-2" name="address-line-2" type="text" autocomplete="address-line2">
+              </div>*@
+
               <div class="govuk-form-group">
-                <label class="govuk-label" for="City">
+                <label class="govuk-label" for="address-town">
                   Town or city
                 </label>
                 <input class="govuk-input" id="City" name="City" type="text" value="@Model.City" autocomplete="City">
               </div>
 
               <div class="govuk-form-group">
-                <label class="govuk-label" for="State_province">
-                   County (optional)
+                <label class="govuk-label" for="address-county">
+                  County (optional)
                 </label>
                 <input class="govuk-input govuk-!-width-two-thirds" id="State_province" name="State_province" type="text" value="@Model.State_province" autocomplete="State_province">
               </div>
 
               <div class="govuk-form-group">
-                <label class="govuk-label" for="Postal_code">
+                <label class="govuk-label" for="address-postcode">
                   Postcode
                 </label>
                 <input class="govuk-input govuk-input--width-10" id="Postal_code" name="Postal_code" type="text" value="@Model.Postal_code" autocomplete="Postal_code">
               </div>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="InPersonSelection" name="InPersonSelection" type="checkbox" value="The family's home" @(Model.InPersonSelection != null && Model.InPersonSelection.Any(x=>x=="The family's home") ? "checked" : "")>
-              <label class="govuk-label govuk-checkboxes__label" for="InPersonSelection">
-                The family's home
-              </label>
-            </div>
-          </div>
-        </div>
+         </div>
 
       <button class="govuk-button">
         Continue
