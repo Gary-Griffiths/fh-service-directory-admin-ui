@@ -46,7 +46,12 @@ public class OrganisationDetailModel : PageModel
 
         var strOrganisationViewModel = JsonConvert.SerializeObject(OrganisationViewModel);
 
-        return RedirectToPage("/OrganisationAdmin/Welcome", new
+        //return RedirectToPage("/OrganisationAdmin/Welcome", new
+        //{
+        //    strOrganisationViewModel
+        //});
+
+        return RedirectToPage("/OrganisationAdmin/ServiceHomepage", new
         {
             strOrganisationViewModel
         });

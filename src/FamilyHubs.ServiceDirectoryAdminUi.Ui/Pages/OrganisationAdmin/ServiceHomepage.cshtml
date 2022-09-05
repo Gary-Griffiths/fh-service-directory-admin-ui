@@ -1,0 +1,27 @@
+﻿@page
+@model FamilyHubs.ServiceDirectoryAdminUi.Ui.Pages.OrganisationAdmin.ServiceHomepageModel
+@{
+}
+
+<a asp-page="/Index" class="govuk-back-link">Back</a>
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+
+    <h1 class="govuk-heading-xl">@Model.OrganisationViewModel.Name</h1>
+
+    <input asp-for="@Model.StrOrganisationViewModel" type="hidden" />
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+    <div class="cards">
+        <div class="card">
+            <h2 class="govuk-heading-m"><a asp-page="/OrganisationAdmin/ServiceName" asp-route-organisationid="@Model.OrganisationViewModel.Id">Add a service</a></h2>
+            <p class="govuk-body-s">Add a service to the directory.</p>
+        </div>
+        <div class="card">
+            <h2 class="govuk-heading-m"><a asp-page="/OrganisationAdmin/ViewServices" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" asp-route-organisationid="@Model.OrganisationViewModel.Id">Manage your services</a></h2>
+            <p class="govuk-body-s">View, change or delete services in the directory.</p>
+        </div>
+     </div>
+
+</main>
