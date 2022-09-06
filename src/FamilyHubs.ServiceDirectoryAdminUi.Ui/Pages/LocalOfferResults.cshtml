@@ -21,54 +21,52 @@
   padding: 10px;
 }
 
+/* Create four equal columns that floats next to each other */
+.column4 {
+  float: left;
+  width: 25%;
+  padding: 5px;
+  
+}
+
 /* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
+
+#SearchBtn{
+ margin-top: 30px;
+}
+
+.govuk-select{
+    min-width: 5.0em;
+}
+
+
 </style>
 
 <a asp-page="/FindServiceFromPostcode" class="govuk-back-link">Back</a>
+
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-row">
 	    
         
 	    <h1 class="govuk-heading-l">There are @Model.SearchResults.TotalCount results found in your local area</h1>
-	    @*<p class="govuk-body">Find a Service will help you to find the best service to meet your needs from the full list of services that are available in your area.</p>*@
+	    
 
         <div class="row">
-          <div class="column1">
             <form method="post">
-                
+          <div class="column1">
+            
                     <fieldset class="govuk-fieldset">
                         <h1 class="govuk-heading-m">
                             Filter By
                         </h1>
                         <input asp-for="@Model.CurrentLatitude" type="hidden" >
                         <input asp-for="@Model.CurrentLongitude" type="hidden">
-
-                        <div class="govuk-form-group">
-                            <label class="govuk-label" for="searchText">
-                                Search Text
-                            </label>
-                            <input class="govuk-input" id="searchText" name="searchText" value="@Model.SearchText" type="text" autocomplete="searchText">
-                        </div>
-
-                        <div class="govuk-form-group">
-                            <label class="govuk-label" for="minimumAge">
-                                Minimum Age
-                            </label>
-                            <input class="govuk-input" id="minimumAge" name="minimumAge" value="@Model.MinimumAge" asp-for="MinimumAge" type="text" pattern="\d*" oninput="this.value=this.value.replace(/[^0-9]/g,'');" autocomplete="minimumAge">
-                        </div>
-
-                        <div class="govuk-form-group">
-                            <label class="govuk-label" for="maximumAge">
-                                Maximum Age
-                            </label>
-                            <input class="govuk-input" id="maximumAge" name="maximumAge" value="@Model.MaximumAge" asp-for="MaximumAge"  type="text" pattern="\d*" oninput="this.value=this.value.replace(/[^0-9]/g,'');" autocomplete="maximumAge">
-                        </div>
 
                         <div class="govuk-form-group">
                         <label class="govuk-label" for="SelectedDistance">
@@ -80,16 +78,128 @@
 
                     </fieldset>
 
+                    <div class="filters-component__groups__group">
+                    <div>
+                        <div class="govuk-form-group">
+                           
+                               
+                            <fieldset class="govuk-fieldset">
+                                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--s"><h3 class="govuk-fieldset__heading">Eligability</h3></legend>
+                                <label class="govuk-label" for="minimumAge">
+                                    Minimum Age
+                                </label>
+                                <input class="govuk-input govuk-input--width-2" id="minimumAge" name="minimumAge" value="@Model.MinimumAge" asp-for="MinimumAge" type="text" pattern="\d*" oninput="this.value=this.value.replace(/[^0-9]/g,'');" autocomplete="minimumAge">
+                                
+                                <label class="govuk-label" for="maximumAge">
+                                    Maximum Age
+                                </label>
+                                <input class="govuk-input govuk-input--width-2" id="maximumAge" name="maximumAge" value="@Model.MaximumAge" asp-for="MaximumAge"  type="text" pattern="\d*" oninput="this.value=this.value.replace(/[^0-9]/g,'');" autocomplete="maximumAge">
+                      
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="filters-component__groups__group">
+                    <div>
+                        <div class="govuk-form-group">
+                            <fieldset class="govuk-fieldset">
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s"><h3 class="govuk-fieldset__heading">How the support is delivered</h3></legend>
+                                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="delivery-2" name="delivery" type="checkbox" value="In person">
+                                        <label class="govuk-label govuk-checkboxes__label" for="delivery-2">
+                                            In person
+                                        </label>
+                                    </div>
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="delivery" name="delivery" type="checkbox" value="Online">
+                                        <label class="govuk-label govuk-checkboxes__label" for="delivery">
+                                            Online
+                                        </label>
+                                    </div>
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="delivery-3" name="delivery" type="checkbox" value="Telephone">
+                                        <label class="govuk-label govuk-checkboxes__label" for="delivery-3">
+                                            Telephone
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="filters-component__groups__group">
+                    <div>
+                        <div class="govuk-form-group">
+                            <fieldset class="govuk-fieldset">
+                                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s"><h3 class="govuk-fieldset__heading">Cost of service</h3></legend>
+                                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="cost" name="cost" type="checkbox" value="free">
+                                        <label class="govuk-label govuk-checkboxes__label" for="cost">
+                                            Free
+                                        </label>
+                                    </div>
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="cost-2" name="cost" type="checkbox" value="paid">
+                                        <label class="govuk-label govuk-checkboxes__label" for="cost-2">
+                                            Paid
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
                      <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
                         Filter
                     </button>
-
-                </form>
           </div>
           <div class="column2" >
-            <h1 class="govuk-heading-m">
+
+            <div>
+                
+                    <h1 class="govuk-heading-m">
                           Services
                 </h1>
+              <div class="column4">
+                  <div class="govuk-form-group">
+                        <label class="govuk-label" for="searchText">
+                            Search Text
+                        </label>
+                        <input class="govuk-input" id="searchText" name="searchText" value="@Model.SearchText" type="text" autocomplete="searchText">
+                    </div>
+                
+              </div>
+              <div class="column4">
+               <div class="govuk-form-group">
+                    <label class="govuk-label" for="searchText">
+                        Postcode
+                    </label>
+                    <input class="govuk-input" id="searchPostcode" name="searchPostcode" value="@Model.SearchPostCode" type="text" autocomplete="searchText">
+                </div>
+              </div>
+              <div class="column4">
+                <label class="govuk-label" for="sort">
+                  Sort by
+                </label>
+                <select class="govuk-select" id="sort" name="sort" >
+                  <option value="distance">Distance</option>
+                  <option value="alphabetically" selected>Alphabetically</option>
+                  <option value="updated">Recently updated</option>
+                </select>
+              </div>
+              <div class="column4">
+               <button id="SearchBtn" type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                    Search
+               </button>
+              </div>
+              
+            </div>
+                <br />
                 @foreach(var item in Model.SearchResults.Items)
                 {
                     <ul class="no-bullets">
@@ -100,7 +210,288 @@
                             
                 }
           </div>
-        </div>
+            </form>  
+      </div>
     </div>
 </div>
 
+ @*
+  <div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+  <h1 class="govuk-heading-l">3 results found</h1>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <div class="filters-component panel-component__content" id="filters-component" data-controller="filters">
+      <div class="filters-component__heading"><h2 class="govuk-heading-m">Filter results</h2>
+      </div>
+      <div class="filters-component__groups">
+        <div class="filters-component__groups__group">
+          <div>
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s"><h3 class="govuk-fieldset__heading">Type of service</h3></legend>
+                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="types" name="types" type="checkbox" value="Baby classes"> <!--aria-controls="baby-classes-conditional"!-->
+                    <label class="govuk-label govuk-checkboxes__label" for="types">
+                      Baby classes
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="types-2" name="types" type="checkbox" value="Toddler groups" checked>
+                    <label class="govuk-label govuk-checkboxes__label" for="types-2">
+                      Toddler groups
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="types-3" name="types" type="checkbox" value="Special education needs and disability support (SEND)">
+                    <label class="govuk-label govuk-checkboxes__label" for="types-3">
+                      Special education needs and disability support (SEND)
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="types-4" name="types" type="checkbox" value="Mental health and wellbeing">
+                    <label class="govuk-label govuk-checkboxes__label" for="types-4">
+                      Mental health and wellbeing
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="types-5" name="types" type="checkbox" value="Support for adoptive families">
+                    <label class="govuk-label govuk-checkboxes__label" for="types-5">
+                      Support for adoptive families
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="types-6" name="types" type="checkbox" value="Help with teenagers">
+                    <label class="govuk-label govuk-checkboxes__label" for="types-6">
+                      Help with teenagers
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class="filters-component__groups__group">
+          <div>
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s"><h3 class="govuk-fieldset__heading">Who the support is for</h3></legend>
+                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="age" name="age" type="checkbox" value="Parents expecting a baby">
+                    <label class="govuk-label govuk-checkboxes__label" for="age">
+                      Parents expecting a baby
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="age-2" name="age" type="checkbox" value="Parents and carers">
+                    <label class="govuk-label govuk-checkboxes__label" for="age-2">
+                      Parents and carers
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="age-3" name="age" type="checkbox" value="Children and young people" aria-controls="age-range">
+                    <label class="govuk-label govuk-checkboxes__label" for="age-3">
+                      Children and young people
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="age-range">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label" for="ageNumber">
+                        Age
+                      </label>
+                      <select class="govuk-select" id="ageNumber" name="ageNumber">
+                        <option value="all" selected>All ages</option>
+                        <option value="0">0 to 12 months</option>
+                        <option value="1">1 year old</option>
+                        <option value="2">2 year old</option>
+                        <option value="3">3 year old</option>
+                        <option value="4">4 year old</option>
+                        <option value="5">5 year old</option>
+                        <option value="6">6 year old</option>
+                        <option value="7">7 year old</option>
+                        <option value="8">8 year old</option>
+                        <option value="9">9 year old</option>
+                        <option value="10">10 year old</option>
+                        <option value="11">11 year old</option>
+                        <option value="12">12 year old</option>
+                        <option value="13">13 year old</option>
+                        <option value="14">14 year old</option>
+                        <option value="15">15 year old</option>
+                        <option value="16">16 year old</option>
+                        <option value="17">17 year old</option>
+                        <option value="18">18 year old</option>
+                        <option value="19">19 year old</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class="filters-component__groups__group">
+          <div>
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s"><h3 class="govuk-fieldset__heading">How the support is delivered</h3></legend>
+                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="delivery-2" name="delivery" type="checkbox" value="In person">
+                    <label class="govuk-label govuk-checkboxes__label" for="delivery-2">
+                      In person
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="delivery" name="delivery" type="checkbox" value="Online">
+                    <label class="govuk-label govuk-checkboxes__label" for="delivery">
+                      Online
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="delivery-3" name="delivery" type="checkbox" value="Telephone">
+                    <label class="govuk-label govuk-checkboxes__label" for="delivery-3">
+                      Telephone
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class="filters-component__groups__group">
+          <div>
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s"><h3 class="govuk-fieldset__heading">Cost of service</h3></legend>
+                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="cost" name="cost" type="checkbox" value="free">
+                    <label class="govuk-label govuk-checkboxes__label" for="cost">
+                      Free
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="cost-2" name="cost" type="checkbox" value="paid">
+                    <label class="govuk-label govuk-checkboxes__label" for="cost-2">
+                      Paid
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button"
+              data-prevent-double-click="true">Apply filters
+      </button>
+
+    </div>
+  </div>
+  <div class="govuk-grid-column-two-thirds vacancies_index">
+    <div class="search-results-controls govuk-!-margin-bottom-0"><h2 class="govuk-heading-m">Search for services</h2>
+      <div class="govuk-form-group">
+        <label for="searchName" class="govuk-label">Name of service</label>
+        <input id="searchName" class="govuk-input" type="text" value="" name="searchName">
+      </div>
+        <div class="govuk-form-group">
+          <label for="postcode" class="govuk-label">Postcode</label>
+            <input class="govuk-input" id="postcode" name="postcode"
+                   value="E3" type="text">
+      </div>
+      <div class="govuk-form-group location-search__radius">
+        <label class="govuk-label" for="sort">
+          Sort by
+        </label>
+        <select class="govuk-select" id="sort" name="sort">
+          <option value="distance">Distance</option>
+          <option value="alphabetically" selected>Alphabetically</option>
+          <option value="updated">Recently updated</option>
+        </select>
+      </div>
+      <div class="search-results-controls__submit">
+        <button type="submit" formnovalidate="formnovalidate"
+                class="govuk-button govuk-button govuk-!-margin-bottom-3 govuk-!-width-full" data-module="govuk-button"
+                data-prevent-double-click="true">Search
+        </button>
+      </div>
+    </div>
+    <ul class="search-results" role="list">
+      <li role="listitem" tab-index="0">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+          <a class="govuk-link" href="bouncers/details">Bouncers Parent And Toddler Group</a>
+        </h2>
+        <p class="govuk-body">
+          The Good Shepherd Mission, 17 Three Colts Lane, London, E2 6JL
+        </p>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Managed by</dt>
+          <dd>Bouncers</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Referral</dt>
+          <dd>Self-referral or referred</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Cost</dt>
+          <dd>Paid</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Type of support</dt>
+          <dd>Toddler groups</dd>
+        </dl>
+      </li>
+      <li role="listitem" tab-index="0">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+          <a class="govuk-link" href="#">East London Tabernacle</a>
+        </h2>
+        <p class="govuk-body">
+          East London Tabernacle Baptist Church, 1 Burdett Road, London, E3 4TU
+        </p>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Managed by</dt>
+          <dd>East London Tabernacle</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Referral</dt>
+          <dd>Self-referral or referred</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Cost</dt>
+          <dd>Free</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Type of support</dt>
+          <dd>Toddler groups</dd>
+        </dl>
+      </li>
+      <li role="listitem" tab-index="0">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+          <a class="govuk-link" href="#">Island Tots</a>
+        </h2>
+        <p class="govuk-body">
+          Island Advise Centre Island House, Roserton Street, London, E14 3PG
+        </p>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Managed by</dt>
+          <dd>Island Tots</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Referral</dt>
+          <dd>Self-referral or referred</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Cost</dt>
+          <dd>Paid</dd>
+        </dl>
+        <dl class="govuk-body-s dtmargins">
+          <dt class="govuk-!-font-weight-bold">Type of support</dt>
+          <dd>Toddler groups</dd>
+        </dl>
+      </li>
+    </ul>
+  </div>
+</div>
+*@

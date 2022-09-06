@@ -20,4 +20,14 @@ public class LocalOfferDetailModel : PageModel
     {
         LocalOffer = await _localOfferClientService.GetLocalOfferById(id);
     }
+
+    public IActionResult OnPost(string id, string name)
+    {
+        return RedirectToPage("ConnectFamilyToServiceStart", new
+        {
+            id = id,
+            name = name
+        });
+        
+    }
 }

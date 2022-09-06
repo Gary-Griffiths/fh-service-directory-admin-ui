@@ -26,6 +26,9 @@ public class LocalOfferResultsModel : PageModel
     [BindProperty(SupportsGet = true)]
     public string? SearchText { get; set; }
 
+    [BindProperty]
+    public string? SearchPostCode { get; set; }
+
     public List<SelectListItem> DistanceSelectionList { get; } = new List<SelectListItem>
     {
         new SelectListItem { Value = "1609.34", Text = "1 mile" },
