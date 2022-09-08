@@ -59,7 +59,8 @@ public class LocalOfferResultsModel : PageModel
             maxAge = 99;
         }
 
-        SearchResults = await _localOfferClientService.GetLocalOffers("active", minAge, maxAge, latitude, longitude, distance, 1, 99, SearchText ?? string.Empty);
+        SearchResults = await _localOfferClientService.GetLocalOffers("active", minAge, maxAge, (latitude != 0.0D) ? latitude : null, (longitude != 0.0D) ? longitude : null, (distance > 0.0D) ? distance : null, 1, 99, SearchText ?? string.Empty);
+        //SearchResults = await _localOfferClientService.GetLocalOffers("active", minAge, maxAge, latitude, longitude, distance, 1, 99, SearchText ?? string.Empty);
     }
 
     public IActionResult OnPost()

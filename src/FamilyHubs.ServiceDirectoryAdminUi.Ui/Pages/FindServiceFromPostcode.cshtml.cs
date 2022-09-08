@@ -30,7 +30,6 @@ public class FindServiceFromPostcodeModel : PageModel
 
         PostcodeApiModel postcodeApiModel = await _postcodeLocationClientService.LookupPostcode(postCode);
 
-
         return RedirectToPage("LocalOfferResults", new
         {
             postcodeApiModel.result.latitude,
