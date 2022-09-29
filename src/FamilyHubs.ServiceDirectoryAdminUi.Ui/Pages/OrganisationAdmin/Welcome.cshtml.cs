@@ -2,12 +2,15 @@ using FamilyHubs.ServiceDirectory.Shared.Models.Api.OpenReferralServices;
 using FamilyHubs.ServiceDirectoryAdminUi.Ui.Models;
 using FamilyHubs.ServiceDirectoryAdminUi.Ui.Services;
 using FamilyHubs.ServiceDirectoryAdminUi.Ui.Services.Api;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
 namespace FamilyHubs.ServiceDirectoryAdminUi.Ui.Pages.OrganisationAdmin;
 
+//[Authorize(Policy = "ApiScope")]
+[Authorize]
 public class WelcomeModel : PageModel
 {
     [BindProperty]
@@ -29,9 +32,22 @@ public class WelcomeModel : PageModel
     {
         /*** Using Session storage as a service ***/
         
-            OrganisationViewModel = _session.RetrieveService(HttpContext) ?? new OrganisationViewModel();
+        OrganisationViewModel = _session.RetrieveService(HttpContext) ?? new OrganisationViewModel();
+        if (OrganisationViewModel != null && OrganisationViewModel.Id == Guid.Empty)
+        {
+            OrganisationViewModel organisationViewModel = new()
+            {
+                Id = new Guid("72e653e8-1d05-4821-84e9-9177571a6013")
+            };
 
-        if (OrganisationViewModel != null)
+            organisationViewModel.Name = "Bristol City Council";
+
+            _session.StoreService(HttpContext, organisationViewModel);
+
+            OrganisationViewModel = organisationViewModel;
+        }
+
+        if (OrganisationViewModel != null && OrganisationViewModel.Id != Guid.Empty)
             Services = await _localOfferClientService.GetServicesByOrganisationId(OrganisationViewModel.Id.ToString());
         else
             Services = new List<OpenReferralServiceDto>();

@@ -1,5 +1,6 @@
 using FamilyHubs.ServiceDirectoryAdminUi.Ui.Extensions;
 using FamilyHubs.ServiceDirectoryAdminUi.Ui.Services;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,33 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "oidc";
+})
+    .AddCookie("Cookies")
+    .AddOpenIdConnect("oidc", options =>
+    {
+        options.Authority = "https://localhost:5001";
+
+        options.ClientId = "servicedirectory";
+        options.ClientSecret = "secret";
+        options.ResponseType = "code";
+
+        options.SaveTokens = true;
+
+        options.Scope.Clear();
+        options.Scope.Add("openid");
+        options.Scope.Add("profile");
+        options.Scope.Add("offline_access");
+        options.Scope.Add("servicedirectoryapi");
+
+        options.GetClaimsFromUserInfoEndpoint = true;
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,11 +66,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
 
 app.MapRazorPages();
+//app.MapRazorPages().RequireAuthorization();
 
 app.Run();
 

@@ -33,6 +33,8 @@ public class HeaderViewModel : IHeaderViewModel
         //if (configuration == null) throw new ArgumentNullException("configuration");
         UserContext = userContext ?? throw new ArgumentNullException("userContext");
 
+        var user = userContext.User;
+
         _linkCollection = linkCollection ?? new LinkCollection();
         _linkHelper = linkHelper ?? new LinkHelper(_linkCollection);
         _urlHelper = urlHelper ?? new UrlHelper();
@@ -43,8 +45,13 @@ public class HeaderViewModel : IHeaderViewModel
 
         // Header links
         AddOrUpdateLink(new GovUk(GovUkHref, isLegacy: UseLegacyStyles));
-        AddOrUpdateLink(new HomeLink("/Index", UseLegacyStyles ? "" : "govuk-header__link govuk-header__link--service-name"));
-        AddOrUpdateLink(new OrganisationAdminLink("/OrganisationAdmin/Start", UseLegacyStyles ? "" : "govuk-header__link govuk-header__link--service-name"));
+        if (userContext.User.Identity.IsAuthenticated)
+        {
+            AddOrUpdateLink(new SignOutLink("/Signout", UseLegacyStyles ? "" : "govuk-header__link govuk-header__link--service-name"));
+        }
+        
+        //AddOrUpdateLink(new HomeLink("/Index", UseLegacyStyles ? "" : "govuk-header__link govuk-header__link--service-name"));
+        //AddOrUpdateLink(new OrganisationAdminLink("/OrganisationAdmin/Start", UseLegacyStyles ? "" : "govuk-header__link govuk-header__link--service-name"));
         //AddOrUpdateLink(new WeatherForecast("WeatherForecast", UseLegacyStyles ? "" : "govuk-header__link govuk-header__link--service-name"));
         //AddOrUpdateLink(new ToDoSelection("Todo", UseLegacyStyles ? "" : "govuk-header__link govuk-header__link--service-name"));
 
