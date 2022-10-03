@@ -136,7 +136,8 @@ public class ServiceNameModel : PageModel
             sessionVm = new OrganisationViewModel();
         }
         sessionVm.ServiceName = ServiceName;
-        _session.StoreOrganisationWithService(HttpContext, sessionVm);
+        if (_session != null)
+            _session.StoreOrganisationWithService(HttpContext, sessionVm);
 
         /////*** Using Session storage ***/
         //var sessionVm = HttpContext.Session.Get<OrganisationViewModel>(SessionKeyService);
@@ -157,7 +158,7 @@ public class ServiceNameModel : PageModel
         //    StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
         //}
 
-        if (_session.RetrieveLastPageName(HttpContext) == CheckServiceDetailsPageName)
+        if (_session != null && _session.RetrieveLastPageName(HttpContext) == CheckServiceDetailsPageName)
         {
             return RedirectToPage($"/OrganisationAdmin/{CheckServiceDetailsPageName}");
         }

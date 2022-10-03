@@ -10,7 +10,7 @@ public class SessionService : ISessionService
 {
     public OrganisationViewModel RetrieveOrganisationWithService(HttpContext httpContext)
     {
-        return httpContext.Session.Get<OrganisationViewModel>(SessionKeyOrgWithService);
+        return httpContext.Session.Get<OrganisationViewModel>(SessionKeyOrgWithService) ?? new OrganisationViewModel();
     }
     public void StoreOrganisationWithService(HttpContext httpContext, OrganisationViewModel vm)
     {
@@ -19,7 +19,7 @@ public class SessionService : ISessionService
 
     public string RetrieveLastPageName(HttpContext httpContext)
     {
-        return httpContext.Session.Get<string>(SessionKeyCurrentPage);
+        return httpContext.Session.Get<string>(SessionKeyCurrentPage) ?? string.Empty;
     }
 
     public void StoreCurrentPageName(HttpContext httpContext, string currPage)
@@ -29,7 +29,7 @@ public class SessionService : ISessionService
 
     public OpenReferralServiceDto RetrieveService(HttpContext httpContext)
     {
-        return httpContext.Session.Get<OpenReferralServiceDto>(SessionKeyService);
+        return httpContext.Session.Get<OpenReferralServiceDto>(SessionKeyService) ?? new OpenReferralServiceDto();
     }
 
     public void StoreService(HttpContext httpContext, OpenReferralServiceDto serviceDto)

@@ -1,5 +1,7 @@
 using FamilyHubs.ServiceDirectoryAdminUi.Ui.Extensions;
 using FamilyHubs.ServiceDirectoryAdminUi.Ui.Services;
+using System.IdentityModel.Tokens.Jwt;
+//using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,14 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    //options.DefaultChallengeScheme = "oidc";
+}).AddCookie("Cookies");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +48,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();

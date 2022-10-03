@@ -13,7 +13,7 @@
 
         <form method="post">
           <div class="govuk-form-group"> <label for="email" class="govuk-label" aria-describedby="user_id-hint">Email address</label>
-            <input type="text" name="email" id="email" class="govuk-input govuk-!-width-one-half" value="@Model.Email" maxlength="22" autocomplete="email">
+            <input type="text" name="email" id="email" class="govuk-input govuk-!-width-one-half" value="@Model.Email" maxlength="255" autocomplete="email">
           </div>
           <div class="govuk-form-group"> <label for="password" class="govuk-label">Password</label>
             <input type="password" name="password" id="password" class="govuk-input govuk-!-width-one-half" value="@Model.Password" autocomplete="current-password">

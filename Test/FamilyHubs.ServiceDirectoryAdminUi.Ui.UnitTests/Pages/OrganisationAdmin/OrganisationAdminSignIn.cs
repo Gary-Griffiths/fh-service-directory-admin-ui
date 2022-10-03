@@ -15,10 +15,11 @@ namespace FamilyHubs.ServiceDirectoryAdminUi.Ui.UnitTests
         {
             // Arrange
             var mockSessionService = new Mock<ISessionService>();
-            var sut = new FamilyHubs.ServiceDirectoryAdminUi.Ui.Pages.OrganisationAdmin.SignInModel(mockSessionService.Object);
+            var mockAuthService = new Mock<IAuthService>();
+            var sut = new FamilyHubs.ServiceDirectoryAdminUi.Ui.Pages.OrganisationAdmin.SignInModel(mockSessionService.Object, mockAuthService.Object);
 
             // Act
-            var result = sut.OnPost() as RedirectToRouteResult;
+            var result = sut.OnPost(); // as RedirectToRouteResult;
 
             // Assert
             result.Should().BeNull();

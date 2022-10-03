@@ -34,7 +34,7 @@ public class WhoForModel : PageModel
 
     public bool ValidAgeRange { get; set; } = true;
 
-    public List<SelectListItem> AgeRange { get; set; }
+    public List<SelectListItem> AgeRange { get; set; } = default!;
 
     //[BindProperty]
     //public string? StrOrganisationViewModel { get; set; }
@@ -103,7 +103,7 @@ public class WhoForModel : PageModel
             InitializeAgeRange();
             return Page();
         }
-        if (Children == "Yes" && Int32.Parse(SelectedMinAge) >= Int32.Parse(SelectedMaxAge))
+        if (Children == "Yes" && Int32.Parse(SelectedMinAge ?? "0") >= Int32.Parse(SelectedMaxAge ?? "99"))
         {
             ModelState.AddModelError("Age Range Invalid", "Please select a different age range");
             ValidAgeRange = false;

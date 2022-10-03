@@ -178,7 +178,7 @@ public class CheckServiceDetailsModel : PageModel
         }
 
         //TODO - Clear session before redirecting (both page name and servcie key)
-        _session.StoreCurrentPageName(HttpContext, null);
+        _session.StoreCurrentPageName(HttpContext, "");
         _session.StoreOrganisationWithService(HttpContext, null); //TODO - Use session.clear instead of this
 
         return RedirectToPage("/OrganisationAdmin/ServiceAdded");

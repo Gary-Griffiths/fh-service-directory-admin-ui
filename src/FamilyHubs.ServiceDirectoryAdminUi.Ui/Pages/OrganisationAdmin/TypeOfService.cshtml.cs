@@ -52,7 +52,7 @@ public class TypeOfServiceModel : PageModel
         sessionVm.TaxonomySelection = new List<string>(TaxonomySelection);
         _session?.StoreOrganisationWithService(HttpContext, sessionVm);
 
-        if (_session.RetrieveLastPageName(HttpContext) == CheckServiceDetailsPageName)
+        if (_session != null && _session.RetrieveLastPageName(HttpContext) == CheckServiceDetailsPageName)
         {
             return RedirectToPage($"/OrganisationAdmin/{CheckServiceDetailsPageName}");
         }
